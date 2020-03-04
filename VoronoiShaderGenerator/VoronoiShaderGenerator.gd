@@ -15,6 +15,9 @@ func _ready():
 func get_image():
 	return generated_image
 
+func _process(delta):
+	pass
+
 func ___generate_image():
 	viewport.size = image_size
 	shader_container.rect_size = image_size
@@ -24,5 +27,7 @@ func ___generate_image():
 	yield(get_tree(),"idle_frame")
 	yield(get_tree(),"idle_frame")
 	generated_image = drawer.get_texture().get_data().duplicate()
-	generated_image.save_png("user://test.png")
+	
+	print(generated_image)
+	#generated_image.save_png("user://test.png")
 	drawer.hide()
