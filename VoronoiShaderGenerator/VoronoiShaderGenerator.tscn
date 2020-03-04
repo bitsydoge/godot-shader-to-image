@@ -3,15 +3,11 @@
 [ext_resource path="res://VoronoiShaderGenerator/1px.png" type="Texture" id=1]
 [ext_resource path="res://VoronoiShaderGenerator/VoronoiShaderGenerator.gd" type="Script" id=2]
 
-[sub_resource type="ViewportTexture" id=1]
-viewport_path = NodePath("Viewport")
-
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
 
-uniform vec2 u_resolution;
-uniform vec2 u_mouse;
-uniform float u_time;
+uniform vec2 resolution;
+uniform float time;
 
 vec2 random2( vec2 p ) 
 {
@@ -20,8 +16,8 @@ vec2 random2( vec2 p )
 
 void fragment() 
 {
-    vec2 st = FRAGCOORD.xy/u_resolution.xy;
-    st.x *= u_resolution.x/u_resolution.y;
+    vec2 st = FRAGCOORD.xy/resolution.xy;
+    st.x *= resolution.x/resolution.y;
     vec3 color = vec3(.0);
     st *= 3.;
     vec2 i_st = floor(st);
@@ -33,7 +29,7 @@ void fragment()
         for (int x= -1; x <= 1; x++) {
             vec2 neighbor = vec2(float(x),float(y));
             vec2 point = random2(i_st + neighbor);
-            point = 0.5 + 0.5*sin(u_time + 6.2831*point);
+            point = 0.5 + 0.5*sin(time + 6.2831*point);
             vec2 diff = neighbor + point - f_st;
             float dist = length(diff);
             m_dist = min(m_dist, dist);
@@ -46,16 +42,14 @@ void fragment()
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
-shader_param/u_resolution = Vector2( 150, 150 )
-shader_param/u_mouse = null
-shader_param/u_time = null
+shader_param/resolution = null
+shader_param/time = null
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("Viewport")
 
 [node name="VoronoiShaderGenerator" type="Node2D"]
 script = ExtResource( 2 )
-
-[node name="Renderer" type="Sprite" parent="."]
-scale = Vector2( 0.000105832, 0.000106636 )
-texture = SubResource( 1 )
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 1280, 1280 )
@@ -71,3 +65,7 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Renderer" type="Sprite" parent="."]
+scale = Vector2( 0.000502402, 0.000502402 )
+texture = SubResource( 1 )

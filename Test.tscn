@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://VoronoiShaderGenerator/VoronoiShaderGenerator.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Test.gd" type="Script" id=2]
+
+[sub_resource type="ImageTexture" id=1]
+
+[node name="Test" type="Control"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 911.577
+margin_top = 13.6842
+margin_right = 1007.58
+margin_bottom = 59.6842
+text = "Generate"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Result" type="TextureRect" parent="."]
+margin_right = 726.0
+margin_bottom = 477.0
+texture = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VoronoiShaderGenerator" parent="." instance=ExtResource( 1 )]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
