@@ -1,33 +1,119 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://VoronoiShaderGenerator/VoronoiShaderGenerator.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Test.gd" type="Script" id=2]
-
-[sub_resource type="ImageTexture" id=1]
+[ext_resource path="res://Test.gd" type="Script" id=1]
+[ext_resource path="res://VoronoiShaderGenerator/VoronoiShaderGenerator.tscn" type="PackedScene" id=2]
+[ext_resource path="res://VoronoiShaderGenerator/VoronoiShaderGenerator_1px.png" type="Texture" id=3]
 
 [node name="Test" type="Control"]
-script = ExtResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1.10803
+margin_bottom = -1.10803
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="."]
-margin_left = 911.577
-margin_top = 13.6842
-margin_right = 1007.58
-margin_bottom = 59.6842
+[node name="VoronoiShaderGenerator" parent="." instance=ExtResource( 2 )]
+multiplier = 1.0
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Result" type="TextureRect" parent="Panel"]
+margin_left = 44.0
+margin_top = 44.0
+margin_right = 556.0
+margin_bottom = 556.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Generate" type="Button" parent="Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -439.0
+margin_top = 507.0
+margin_right = -34.0
+margin_bottom = 553.0
 text = "Generate"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Result" type="TextureRect" parent="."]
-margin_right = 726.0
-margin_bottom = 477.0
-texture = SubResource( 1 )
+[node name="Multiplier" type="SpinBox" parent="Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -352.0
+margin_top = 81.2161
+margin_right = -29.0
+margin_bottom = 105.216
+min_value = 0.01
+step = 0.01
+value = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VoronoiShaderGenerator" parent="." instance=ExtResource( 1 )]
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[node name="Label" type="Label" parent="Panel/Multiplier"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -84.296
+margin_top = -6.45964
+margin_right = -10.296
+margin_bottom = 7.54036
+text = "Multiplier : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Seed" type="LineEdit" parent="Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -352.0
+margin_top = 113.108
+margin_right = -48.0
+margin_bottom = 137.108
+
+[node name="Label" type="Label" parent="Panel/Seed"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -84.296
+margin_top = -6.45964
+margin_right = -10.296
+margin_bottom = 7.54036
+text = "Seed :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RandomSeed" type="Button" parent="Panel/Seed"]
+margin_left = 312.0
+margin_top = 0.108032
+margin_right = 332.0
+margin_bottom = 20.108
+text = "R"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NoiseType" type="OptionButton" parent="Panel"]
+margin_left = 584.0
+margin_top = 49.108
+margin_right = 992.0
+margin_bottom = 69.108
+text = "Type1"
+items = [ "Type1", null, false, 0, null, "Type2", null, false, 1, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Panel/Generate" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Panel/Seed/RandomSeed" to="." method="_on_RandomSeed_pressed"]

@@ -1,49 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://VoronoiShaderGenerator/1px.png" type="Texture" id=1]
+[ext_resource path="res://VoronoiShaderGenerator/VoronoiShaderGenerator_1px.png" type="Texture" id=1]
 [ext_resource path="res://VoronoiShaderGenerator/VoronoiShaderGenerator.gd" type="Script" id=2]
-
-[sub_resource type="Shader" id=2]
-code = "shader_type canvas_item;
-
-uniform vec2 resolution;
-uniform float time;
-
-vec2 random2( vec2 p ) 
-{
-    return fract(sin(vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3))))*43758.5453);
-}
-
-void fragment() 
-{
-    vec2 st = FRAGCOORD.xy/resolution.xy;
-    st.x *= resolution.x/resolution.y;
-    vec3 color = vec3(.0);
-    st *= 3.;
-    vec2 i_st = floor(st);
-    vec2 f_st = fract(st);
-
-    float m_dist = 1.;
-
-    for (int y= -1; y <= 1; y++) {
-        for (int x= -1; x <= 1; x++) {
-            vec2 neighbor = vec2(float(x),float(y));
-            vec2 point = random2(i_st + neighbor);
-            point = 0.5 + 0.5*sin(time + 6.2831*point);
-            vec2 diff = neighbor + point - f_st;
-            float dist = length(diff);
-            m_dist = min(m_dist, dist);
-        }
-    }
-    color += m_dist;
-    color += 1.-step(.02, m_dist);
-    COLOR = vec4(color,1.0);
-}"
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
-shader_param/resolution = null
-shader_param/time = null
+[ext_resource path="res://VoronoiShaderGenerator/VoronoiShaderGenerator_Type1.material" type="Material" id=3]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport")
@@ -57,7 +16,7 @@ render_target_v_flip = true
 render_target_update_mode = 3
 
 [node name="Shader" type="TextureRect" parent="Viewport"]
-material = SubResource( 3 )
+material = ExtResource( 3 )
 margin_right = 1280.0
 margin_bottom = 1280.0
 texture = ExtResource( 1 )

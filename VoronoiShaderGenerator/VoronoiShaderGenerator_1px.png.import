@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/1px.png-79405118b3e3e6c40f5892622ac4cad1.stex"
+path="res://.import/VoronoiShaderGenerator_1px.png-30bf5ab8009c287e2c30ac7dec5d914a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VoronoiShaderGenerator/1px.png"
-dest_files=[ "res://.import/1px.png-79405118b3e3e6c40f5892622ac4cad1.stex" ]
+source_file="res://VoronoiShaderGenerator/VoronoiShaderGenerator_1px.png"
+dest_files=[ "res://.import/VoronoiShaderGenerator_1px.png-30bf5ab8009c287e2c30ac7dec5d914a.stex" ]
 
 [params]
 

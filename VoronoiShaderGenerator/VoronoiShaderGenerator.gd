@@ -1,33 +1,50 @@
 extends Node2D
 
-onready var drawer = $Renderer
-onready var shader_container = $Viewport/Shader
-onready var viewport = $Viewport
+signal generated
 
-var generated_image
-
+export (Vector2) var image_size = Vector2(512,512)
 export (float) var multiplier = 1.0
-export (Vector2) var image_size = Vector2(1024,1024)
+export (int) var _seed = 0
+export(int, "Type1", "Type2") var type = 0
+var ___material_list = [
+	preload("res://VoronoiShaderGenerator/VoronoiShaderGenerator_Type1.material"),
+	preload("res://VoronoiShaderGenerator/VoronoiShaderGenerator_Type2.material")
+]
 
-func _ready():
-	___generate_image()
-	
+#########################
+# Internal
+# Onready
+onready var ___drawer = $Renderer
+onready var ___shader_container = $Viewport/Shader
+onready var ___viewport = $Viewport
+
+# ###
+var ___generated_image
+
 func get_image():
-	return generated_image
-
-func _process(delta):
-	pass
+	if ___generated_image != null:
+		return ___generated_image
+	else:
+		printerr("No image generated")
+		return null
 
 func ___generate_image():
-	viewport.size = image_size
-	shader_container.rect_size = image_size
-	shader_container.get_material().set_shader_param("resolution", image_size*multiplier)
-	drawer.show()
-	yield(get_tree(),"idle_frame")
-	yield(get_tree(),"idle_frame")
-	yield(get_tree(),"idle_frame")
-	generated_image = drawer.get_texture().get_data().duplicate()
+	# Resize generating nodes
+	___viewport.size = image_size
+	___shader_container.rect_size = image_size
 	
-	print(generated_image)
-	#generated_image.save_png("user://test.png")
-	drawer.hide()
+	# Set material type
+	___shader_container.set_material(___material_list[type])
+	
+	# Set shaders param
+	___shader_container.get_material().set_shader_param("resolution", image_size*multiplier)
+	___shader_container.get_material().set_shader_param("seed", _seed/4294967295.0)
+	
+	## Actually Generate Image
+	___drawer.show()
+	yield(get_tree(),"idle_frame")
+	yield(get_tree(),"idle_frame")
+	yield(get_tree(),"idle_frame")
+	___generated_image = ___drawer.get_texture().get_data().duplicate()
+	emit_signal("generated")
+	___drawer.hide()
