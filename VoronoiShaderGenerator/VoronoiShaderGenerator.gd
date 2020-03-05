@@ -68,15 +68,23 @@ onready var ___viewport = $Viewport
 # ###
 var ___generated_image
 
-func get_type_list():
+func get_type_list() -> Dictionary:
 	return ___type_list;
 
-func get_image():
+func get_image() -> Image:
 	if ___generated_image != null:
 		return ___generated_image
 	else:
-		printerr("No image generated")
+		printerr("No image generated, use generate_image() and wait for generated signal")
 		return null
+
+func add_custom_type(name : String, material : Material, args) -> int:
+	___type_list.push_back({
+		"name" : name,
+		"material" : material,
+		"args" : args 
+	})
+	return ___type_list.size()-1
 
 func generate_image():
 	# Resize generating nodes
@@ -86,6 +94,7 @@ func generate_image():
 	# Set material type
 	___shader_container.set_material(___type_list[type].material)
 	
+	#TODO use args array
 	# Set shaders param
 	___shader_container.get_material().set_shader_param("resolution", image_size*multiplier)
 	___shader_container.get_material().set_shader_param("mod1", mod1)

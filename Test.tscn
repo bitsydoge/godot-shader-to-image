@@ -42,7 +42,6 @@ margin_top = 49.108
 margin_right = 992.0
 margin_bottom = 69.108
 text = "Type1 (time)"
-selected = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }

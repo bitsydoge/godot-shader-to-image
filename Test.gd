@@ -22,7 +22,9 @@ func build_noise_type():
 		type.add_item(name) 
 	pass
 
+var custom_material = preload("test_add.material")
 func _ready():
+	generator.add_custom_type("Custom1", custom_material, ["time", "mod1"])
 	build_noise_type();
 
 func _process(_delta):
@@ -49,3 +51,4 @@ func _on_Button_pressed():
 func _on_EnableTime_pressed():
 	enable_time=!enable_time
 	pass # Replace with function body.
+
