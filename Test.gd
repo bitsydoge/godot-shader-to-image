@@ -12,6 +12,54 @@ var enable_time = false
 
 var getted_image
 
+var example_type = [
+	{
+		"name" : "Type1",
+		"material" : preload("ExampleShaders/ShaderToImage_Type1.material"),
+		"args" : ["time"]
+	},
+	{
+		"name" : "Type2",
+		"material" : preload("ExampleShaders/ShaderToImage_Type2.material"),
+		"args" : ["time", "mod1"]
+	},
+	{
+		"name" : "Type3",
+		"material" : preload("ExampleShaders/ShaderToImage_Type3.material"),
+		"args" : ["time"]
+	},
+	{
+		"name" : "Type4",
+		"material" : preload("ExampleShaders/ShaderToImage_Type5.material"),
+		"args" : ["time", "mod1"]
+	},
+	{
+		"name" : "Type5",
+		"material" : preload("ExampleShaders/ShaderToImage_Type5.material"),
+		"args" : ["time", "mod1"]
+	},
+	{
+		"name" : "Type6",
+		"material" : preload("ExampleShaders/ShaderToImage_Type6.material"),
+		"args" : ["time"]
+	},
+	{
+		"name" : "Type7",
+		"material" : preload("ExampleShaders/ShaderToImage_Type7.material"),
+		"args" : ["mod1", "mod2"]
+	},
+	{
+		"name" : "Type8",
+		"material" : preload("ExampleShaders/ShaderToImage_Type8.material"),
+		"args" : ["time"]
+	},
+	{
+		"name" : "Type9",
+		"material" : preload("ExampleShaders/ShaderToImage_Type9.material"),
+		"args" : ["time", "mod1"]
+	},
+]
+
 func build_noise_type():
 	for _type in generator.get_type_list():
 		var name = _type.name
@@ -22,9 +70,9 @@ func build_noise_type():
 		type.add_item(name) 
 	pass
 
-var custom_material = preload("test_add.material")
 func _ready():
-	generator.add_custom_type("Custom1", custom_material, ["time", "mod1"])
+	for ex in example_type:
+		generator.add_custom_type(ex.name, ex.material, ex.args)
 	build_noise_type();
 
 func _process(_delta):
