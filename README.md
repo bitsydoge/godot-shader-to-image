@@ -6,7 +6,6 @@ It's usefull because you can generate thing GPU side then use them CPU side and 
 Drop the "ShaderToImage" folder into your Godot project.
 
 Instance the scene GodotToImage.tscn in your current scene.
-Make sure it apear on the current camera (or on the screen).
 
 Add custom material to the generator : 
 ```gdscript
@@ -22,30 +21,6 @@ shader_to_image.generate_image() # Start generating the image
 yield(shader_to_image, "generated") # Wait the image to be rendered, it take 3 frams
 var my_image = shader_to_image.get_image()
 ```
-
-## Reference
-### Shader Variables
-```gdscript
-resolution = Vector2(512,512)
-```
-The resolution you want the Image to be
-```gdscript
-multiplier = 1.0
-```
-Zoom in or Zoom out on the shader (keep the resolution rendering)
-```gdscript
-time = 0.0
-```
-uniform you can set to edit the shader with time
-```gdscript
-mod1 = 1.0
-```
-uniform you can set to edit the shader
-```gdscript
-mod2 = 0.0
-```
-uniform you can set to edit the shader
-
 ### Functions
 ```gdscript
 func get_type_list() -> Array:
@@ -91,6 +66,29 @@ void fragment()
     COLOR = vec4( vec3(rand), 1.0);
 }
 ```
+
+## Reference
+### Shader Variables
+```gdscript
+resolution = Vector2(512,512)
+```
+The resolution you want the Image to be
+```gdscript
+multiplier = 1.0
+```
+Zoom in or Zoom out on the shader (keep the resolution rendering)
+```gdscript
+time = 0.0
+```
+uniform you can set to edit the shader with time
+```gdscript
+mod1 = 1.0
+```
+uniform you can set to edit the shader
+```gdscript
+mod2 = 0.0
+```
+uniform you can set to edit the shader
 
 ## TODO
 I need to add easy custom args
