@@ -22,6 +22,9 @@ onready var ___viewport = $Viewport
 # ###
 var ___generated_image
 
+func set_type(id : int) -> void:
+	type = id
+
 func get_type_list() -> Array:
 	return ___type_list;
 
@@ -32,7 +35,7 @@ func get_image() -> Image:
 		printerr("No image generated, use generate_image() and wait for \"generated\" signal")
 		return null
 
-func add_custom_type(name : String, material : Material, args) -> int:
+func add_custom_type(name : String, material : Material, args = []) -> int:
 	___type_list.push_back({
 		"name" : name,
 		"material" : material,
