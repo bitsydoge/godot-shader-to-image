@@ -15,5 +15,5 @@ _global_script_class_icons={
 
 [application]
 
-config/name="VoronoiShaderGenerator"
+config/name="ShaderToImage"
 run/main_scene="res://Test.tscn"
