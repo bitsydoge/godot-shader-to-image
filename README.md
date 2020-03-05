@@ -17,7 +17,7 @@ func _ready():
 
 Then generate an Image :
 ```gdscript
-shader_to_image.set_type_id(my_id) # Choose the material to use
+shader_to_image.set_type(my_id) # Choose the material to use
 shader_to_image.generate_image() # Start generating the image
 yield(shader_to_image, "generated") # Wait the image to be rendered, it take 3 frams
 var my_image = shader_to_image.get_image()
