@@ -13,7 +13,7 @@ var enable_time = false
 var getted_image
 
 func build_noise_type():
-	for _type in generator.___type_list:
+	for _type in generator.get_type_list():
 		var name = _type.name
 		name += " ("
 		for arg in _type.args:
@@ -37,7 +37,7 @@ func _on_Button_pressed():
 	generator.mod1 = mod1.value
 	generator.mod2 = mod2.value
 	
-	generator.___generate_image()
+	generator.generate_image()
 	yield(generator, "generated")
 	getted_image = generator.get_image()
 	

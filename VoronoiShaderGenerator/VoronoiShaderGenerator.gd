@@ -68,6 +68,9 @@ onready var ___viewport = $Viewport
 # ###
 var ___generated_image
 
+func get_type_list():
+	return ___type_list;
+
 func get_image():
 	if ___generated_image != null:
 		return ___generated_image
@@ -75,7 +78,7 @@ func get_image():
 		printerr("No image generated")
 		return null
 
-func ___generate_image():
+func generate_image():
 	# Resize generating nodes
 	___viewport.size = image_size
 	___shader_container.rect_size = image_size
