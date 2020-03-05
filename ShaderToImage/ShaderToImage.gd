@@ -13,47 +13,47 @@ export(int) var type = 0
 var ___type_list = [
 	{
 		"name" : "Type1",
-		"material" : preload("Materials/VoronoiShaderGenerator_Type1.material"),
+		"material" : preload("Materials/ShaderToImage_Type1.material"),
 		"args" : ["time"]
 	},
 	{
 		"name" : "Type2",
-		"material" : preload("Materials/VoronoiShaderGenerator_Type2.material"),
+		"material" : preload("Materials/ShaderToImage_Type2.material"),
 		"args" : ["time", "mod1"]
 	},
 	{
 		"name" : "Type3",
-		"material" : preload("Materials/VoronoiShaderGenerator_Type3.material"),
+		"material" : preload("Materials/ShaderToImage_Type3.material"),
 		"args" : ["time"]
 	},
 	{
 		"name" : "Type4",
-		"material" : preload("Materials/VoronoiShaderGenerator_Type5.material"),
+		"material" : preload("Materials/ShaderToImage_Type5.material"),
 		"args" : ["time", "mod1"]
 	},
 	{
 		"name" : "Type5",
-		"material" : preload("Materials/VoronoiShaderGenerator_Type5.material"),
+		"material" : preload("Materials/ShaderToImage_Type5.material"),
 		"args" : ["time", "mod1"]
 	},
 	{
 		"name" : "Type6",
-		"material" : preload("Materials/VoronoiShaderGenerator_Type6.material"),
+		"material" : preload("Materials/ShaderToImage_Type6.material"),
 		"args" : ["time"]
 	},
 	{
 		"name" : "Type7",
-		"material" : preload("Materials/VoronoiShaderGenerator_Type7.material"),
+		"material" : preload("Materials/ShaderToImage_Type7.material"),
 		"args" : ["mod1", "mod2"]
 	},
 	{
 		"name" : "Type8",
-		"material" : preload("Materials/VoronoiShaderGenerator_Type8.material"),
+		"material" : preload("Materials/ShaderToImage_Type8.material"),
 		"args" : ["time"]
 	},
 	{
 		"name" : "Type9",
-		"material" : preload("Materials/VoronoiShaderGenerator_Type9.material"),
+		"material" : preload("Materials/ShaderToImage_Type9.material"),
 		"args" : ["time", "mod1"]
 	},
 ]
@@ -75,7 +75,7 @@ func get_image() -> Image:
 	if ___generated_image != null:
 		return ___generated_image
 	else:
-		printerr("No image generated, use generate_image() and wait for generated signal")
+		printerr("No image generated, use generate_image() and wait for \"generated\" signal")
 		return null
 
 func add_custom_type(name : String, material : Material, args) -> int:

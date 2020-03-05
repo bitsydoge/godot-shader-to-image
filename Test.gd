@@ -1,7 +1,7 @@
 extends Control
 
 onready var result = $Panel/Result
-onready var generator = $VoronoiShaderGenerator
+onready var generator = $ShaderToImage
 onready var multiplier = $Panel/Multiplier
 onready var type = $Panel/NoiseType
 onready var time = $Panel/Time
