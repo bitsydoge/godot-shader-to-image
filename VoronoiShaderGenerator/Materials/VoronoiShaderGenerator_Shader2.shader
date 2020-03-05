@@ -1,8 +1,8 @@
 shader_type canvas_item;
-
+// Author: Stefan Gustavson
+// Title: Classic 2D cellular noise
 uniform vec2 resolution;
 uniform float time;
-uniform float seed;
 
 // Permutation polynomial: (34x^2 + x) mod 289
 vec3 permute(vec3 x) {
@@ -11,7 +11,7 @@ vec3 permute(vec3 x) {
 
 const float K = 0.142857142857; // 1/7
 const float Ko = 0.428571428571; // 3/7
-const float jitter = 1.0; // Less gives more regular pattern
+uniform float mod1 = 1.0; // Less gives more regular pattern
 
 // Cellular noise, returning F1 and F2 in a vec2.
 // Standard 3x3 search window for good F1 and F2 values
@@ -24,20 +24,20 @@ vec2 cellular(vec2 P) {
 	vec3 p = permute(px.x + Pi.y + oi); // p11, p12, p13
 	vec3 ox = fract(p*K) - Ko;
 	vec3 oy = mod(floor(p*K),7.0)*K - Ko;
-	vec3 dx = Pf.x + 0.5 + jitter*ox;
-	vec3 dy = Pf.y - of + jitter*oy;
+	vec3 dx = Pf.x + 0.5 + mod1*ox;
+	vec3 dy = Pf.y - of + mod1*oy;
 	vec3 d1 = dx * dx + dy * dy; // d11, d12 and d13, squared
 	p = permute(px.y + Pi.y + oi); // p21, p22, p23
 	ox = fract(p*K) - Ko;
 	oy = mod(floor(p*K),7.0)*K - Ko;
-	dx = Pf.x - 0.5 + jitter*ox;
-	dy = Pf.y - of + jitter*oy;
+	dx = Pf.x - 0.5 + mod1*ox;
+	dy = Pf.y - of + mod1*oy;
 	vec3 d2 = dx * dx + dy * dy; // d21, d22 and d23, squared
 	p = permute(px.z + Pi.y + oi); // p31, p32, p33
 	ox = fract(p*K) - Ko;
 	oy = mod(floor(p*K),7.0)*K - Ko;
-	dx = Pf.x - 1.5 + jitter*ox;
-	dy = Pf.y - of + jitter*oy;
+	dx = Pf.x - 1.5 + mod1*ox;
+	dy = Pf.y - of + mod1*oy;
 	vec3 d3 = dx * dx + dy * dy; // d31, d32 and d33, squared
 	// Sort out the two smallest distances (F1, F2)
 	vec3 d1a = min(d1, d2);

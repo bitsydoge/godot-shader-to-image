@@ -36,14 +36,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Generate" type="Button" parent="Panel"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -439.0
-margin_top = 507.0
-margin_right = -34.0
-margin_bottom = 553.0
-text = "Generate"
+[node name="NoiseType" type="OptionButton" parent="Panel"]
+margin_left = 584.0
+margin_top = 49.108
+margin_right = 992.0
+margin_bottom = 69.108
+text = "Type1 (time)"
+selected = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -74,46 +73,101 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Seed" type="LineEdit" parent="Panel"]
+[node name="Time" type="LineEdit" parent="Panel"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -352.0
 margin_top = 113.108
 margin_right = -48.0
 margin_bottom = 137.108
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="Panel/Seed"]
+[node name="Label" type="Label" parent="Panel/Time"]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = -84.296
 margin_top = -6.45964
 margin_right = -10.296
 margin_bottom = 7.54036
-text = "Seed :"
+text = "Time : "
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RandomSeed" type="Button" parent="Panel/Seed"]
+[node name="EnableTime" type="Button" parent="Panel/Time"]
 margin_left = 312.0
 margin_top = 0.108032
 margin_right = 332.0
 margin_bottom = 20.108
-text = "R"
+text = "U"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NoiseType" type="OptionButton" parent="Panel"]
-margin_left = 584.0
-margin_top = 49.108
-margin_right = 992.0
-margin_bottom = 69.108
-text = "Type1"
-items = [ "Type1", null, false, 0, null, "Type2", null, false, 1, null ]
-selected = 0
+[node name="Mod1" type="SpinBox" parent="Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -352.0
+margin_top = 145.108
+margin_right = -29.0
+margin_bottom = 169.108
+max_value = 2.0
+step = 0.001
+value = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Label" type="Label" parent="Panel/Mod1"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -84.296
+margin_top = -6.45964
+margin_right = -10.296
+margin_bottom = 7.54036
+text = "Mod 1 :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mod2" type="SpinBox" parent="Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -352.0
+margin_top = 185.108
+margin_right = -29.0
+margin_bottom = 209.108
+step = 0.01
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/Mod2"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -84.296
+margin_top = -6.45964
+margin_right = -10.296
+margin_bottom = 7.54036
+text = "Mod 2 :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Generate" type="Button" parent="Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -439.0
+margin_top = 507.0
+margin_right = -34.0
+margin_bottom = 553.0
+text = "Generate"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Panel/Time/EnableTime" to="." method="_on_EnableTime_pressed"]
 [connection signal="pressed" from="Panel/Generate" to="." method="_on_Button_pressed"]
-[connection signal="pressed" from="Panel/Seed/RandomSeed" to="." method="_on_RandomSeed_pressed"]
