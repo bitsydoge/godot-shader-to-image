@@ -63,16 +63,12 @@ var example_type = [
 func build_noise_type():
 	for _type in generator.get_type_list():
 		var name = _type.name
-		name += " ("
-		for arg in _type.args:
-			name+=arg+", "
-		name += ")"
 		type.add_item(name) 
 	pass
 
 func _ready():
 	for ex in example_type:
-		generator.add_custom_type(ex.name, ex.material, ex.args)
+		generator.add_custom_type(ex.name, ex.material)
 	build_noise_type();
 
 func _process(_delta):
@@ -82,12 +78,8 @@ func _process(_delta):
 
 func _on_Button_pressed():
 	generator.multiplier = multiplier.value
-	generator.type = type.get_selected_id()
-	generator.time = int(time.text)
-	generator.mod1 = mod1.value
-	generator.mod2 = mod2.value
-	
-	generator.generate_image()
+	generator.set_type(type.get_selected_id())
+	generator.generate_image({"time": time.text, "mod1" : mod1.value, "mod2" : mod2.value})
 	yield(generator, "generated")
 	getted_image = generator.get_image()
 	
@@ -95,19 +87,12 @@ func _on_Button_pressed():
 	text.create_from_image(getted_image)
 	result.texture = text
 
-
 func _on_EnableTime_pressed():
 	enable_time=!enable_time
-	pass # Replace with function body.
-
-
 
 func _on_Save_as_pressed():
 	$Panel/FileDialog.popup()
-	pass # Replace with function body.
-
 
 func _on_FileDialog_file_selected(path):
 	if getted_image:
 		getted_image.save_png(path)
-	pass # Replace with function body.

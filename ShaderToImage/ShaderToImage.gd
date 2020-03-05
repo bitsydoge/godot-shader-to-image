@@ -3,11 +3,7 @@ extends Node2D
 signal generated
 
 export (Vector2) var resolution = Vector2(512,512)
-
 export (float) var multiplier = 1.0
-export (float) var time = 0
-export (float) var mod1 = 1.0
-export (float) var mod2 = 0.0
 
 export(int) var type = 0
 var ___type_list = []
@@ -35,15 +31,14 @@ func get_image() -> Image:
 		printerr("No image generated, use generate_image() and wait for \"generated\" signal")
 		return null
 
-func add_custom_type(name : String, material : Material, args = []) -> int:
+func add_custom_type(name : String, material : Material) -> int:
 	___type_list.push_back({
 		"name" : name,
 		"material" : material,
-		"args" : args 
 	})
 	return ___type_list.size()-1
 
-func generate_image():
+func generate_image(args : Dictionary = {}):
 	# Resize generating nodes
 	___viewport.size = resolution
 	___viewport.render_target_update_mode = Viewport.UPDATE_ALWAYS
@@ -55,9 +50,9 @@ func generate_image():
 	#TODO use args array
 	# Set shaders param
 	___shader_container.get_material().set_shader_param("resolution", resolution*multiplier)
-	___shader_container.get_material().set_shader_param("mod1", mod1)
-	___shader_container.get_material().set_shader_param("mod2", mod2)
-	___shader_container.get_material().set_shader_param("time", time)
+	
+	for arg in args:
+		___shader_container.get_material().set_shader_param(arg, args[arg])
 	
 	## Actually Generate Image
 	___drawer.show()
