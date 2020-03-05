@@ -24,5 +24,6 @@ __meta__ = {
 }
 
 [node name="Renderer" type="Sprite" parent="."]
-scale = Vector2( 0.000502402, 0.000502402 )
+position = Vector2( -7.62939e-06, -1.90735e-06 )
+scale = Vector2( 1e-05, 1e-05 )
 texture = SubResource( 1 )

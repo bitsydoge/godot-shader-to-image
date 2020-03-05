@@ -30,7 +30,7 @@ var example_type = [
 	},
 	{
 		"name" : "Type4",
-		"material" : preload("ExampleShaders/ShaderToImage_Type5.material"),
+		"material" : preload("ExampleShaders/ShaderToImage_Type4.material"),
 		"args" : ["time", "mod1"]
 	},
 	{

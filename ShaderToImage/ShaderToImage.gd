@@ -46,6 +46,7 @@ func add_custom_type(name : String, material : Material, args = []) -> int:
 func generate_image():
 	# Resize generating nodes
 	___viewport.size = resolution
+	___viewport.render_target_update_mode = Viewport.UPDATE_ALWAYS
 	___shader_container.rect_size = resolution
 	
 	# Set material type
@@ -65,4 +66,5 @@ func generate_image():
 	yield(get_tree(),"idle_frame")
 	___generated_image = ___drawer.get_texture().get_data().duplicate()
 	emit_signal("generated")
+	___viewport.render_target_update_mode = Viewport.UPDATE_DISABLED
 	___drawer.hide()
