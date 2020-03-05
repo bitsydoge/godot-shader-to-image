@@ -17,3 +17,7 @@ _global_script_class_icons={
 
 config/name="ShaderToImage"
 run/main_scene="res://Test.tscn"
+
+[display]
+
+window/size/resizable=false

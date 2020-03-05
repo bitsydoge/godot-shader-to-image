@@ -166,5 +166,30 @@ text = "Generate"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Save as" type="Button" parent="Panel"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -440.0
+margin_top = -159.0
+margin_right = -32.0
+margin_bottom = -112.0
+text = "Save as PNG"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileDialog" type="FileDialog" parent="Panel"]
+margin_left = 248.0
+margin_top = 121.108
+margin_right = 792.0
+margin_bottom = 449.108
+access = 2
+current_dir = "C:/"
+current_path = "C:/"
 [connection signal="pressed" from="Panel/Time/EnableTime" to="." method="_on_EnableTime_pressed"]
 [connection signal="pressed" from="Panel/Generate" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Panel/Save as" to="." method="_on_Save_as_pressed"]
+[connection signal="file_selected" from="Panel/FileDialog" to="." method="_on_FileDialog_file_selected"]

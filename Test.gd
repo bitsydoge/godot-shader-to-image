@@ -100,3 +100,14 @@ func _on_EnableTime_pressed():
 	enable_time=!enable_time
 	pass # Replace with function body.
 
+
+
+func _on_Save_as_pressed():
+	$Panel/FileDialog.popup()
+	pass # Replace with function body.
+
+
+func _on_FileDialog_file_selected(path):
+	if getted_image:
+		getted_image.save_png(path)
+	pass # Replace with function body.
