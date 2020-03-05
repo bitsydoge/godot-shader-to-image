@@ -5,47 +5,45 @@ It's usefull because you can generate thing GPU side then use them CPU side and 
 ## How to use
 Drop the "ShaderToImage" folder into your Godot project.
 
-Instance the scene GodotToImage.tscn in your current scene.
+Instance the scene ShaderToImage.tscn in your current scene.
 
-Add custom material to the generator : 
-```gdscript
-var custom_material = preload("my_custom.material")
-func _ready():
-	var my_id = shader_to_image.add_custom_type("Custom1", custom_material, ["time", "mod1"])
-```
+Then generate the Image :
 
-Then generate an Image :
 ```gdscript
-shader_to_image.set_type(my_id) # Choose the material to use
-shader_to_image.generate_image() # Start generating the image
+my_material = load("some_material_path.material")
+shader_to_image.generate_image(my_material) # Start generating the image
 yield(shader_to_image, "generated") # Wait the image to be rendered, it take 3 frams
 var my_image = shader_to_image.get_image()
 ```
+
+## Reference
 ### Functions
+
 ```gdscript
-func get_type_list() -> Array:
+func generate_image(material : Material, resolution := Vector2(512,512), multiplier := 1.0, args := {}):
 ```
-The array with the Dictionary of each material type
+Generate the new image. It is avaiable only when the Signal "generated" is emited.
+- material (Material) : the material you want to render
+- resolution (Vector2) : the final Image resolution, it can be passed to your shader as a uniform
+- multiplier (float) : if you have an uniform it will "zoom in" "zoom out" on your shader will keeping the output resolution
+- args (Dictionary) : You can pass argument to the uniform of the shader with a Dictionary. Ex : `{"time": 50.2, "mod1" : 0.8, "mod2" : 0.45}`
+
 ```gdscript
 func get_image() -> Image:
 ```
-Return the image reference
-```gdscript
-func add_custom_type(name : String, material : Material, args) -> int:
-```
-Add your custom material to the material list. Return its ID inside type_list.
-args represent an array of args for this array
-TODO : you will add any argument you want for now it have "hard coded" time, mod1, mod2
-```gdscript
-func generate_image() -> void:
-```
-Generate the new image. It is avaiable only when the Signal "generated" is emited.
+Return the image reference, if no image have been generated return null and print an error
 
 ### Signal
 ```gdscript
 signal generated
 ```
 Signal emited everytime an image is generated. (It need 3 frames to be generated)
+
+### Shader Uniform
+```gdscript
+uniform vec2 resolution
+```
+Add it to your shader to handle the surface resoltion, it will take the value from the value `resolution*multiply` from generate_image function
 
 ## Shader example
 ```glsl
@@ -66,32 +64,6 @@ void fragment()
     COLOR = vec4( vec3(rand), 1.0);
 }
 ```
-
-## Reference
-### Shader Variables
-```gdscript
-resolution = Vector2(512,512)
-```
-The resolution you want the Image to be
-```gdscript
-multiplier = 1.0
-```
-Zoom in or Zoom out on the shader (keep the resolution rendering)
-```gdscript
-time = 0.0
-```
-uniform you can set to edit the shader with time
-```gdscript
-mod1 = 1.0
-```
-uniform you can set to edit the shader
-```gdscript
-mod2 = 0.0
-```
-uniform you can set to edit the shader
-
-## TODO
-I need to add easy custom args
 
 ## Licence Info
 The MIT licence doesn't include the shaders inside the folder "ExampleShaders"

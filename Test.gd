@@ -61,14 +61,16 @@ var example_type = [
 ]
 
 func build_noise_type():
-	for _type in generator.get_type_list():
-		var name = _type.name
-		type.add_item(name) 
+	for _type in example_type:
+		var name = _type.name + " ["
+		for arg in _type.args:
+			name += arg + ", "
+			
+		name += "]"
+		type.add_item(name)
 	pass
 
 func _ready():
-	for ex in example_type:
-		generator.add_custom_type(ex.name, ex.material)
 	build_noise_type();
 
 func _process(_delta):
@@ -77,12 +79,10 @@ func _process(_delta):
 	pass
 
 func _on_Button_pressed():
-	generator.multiplier = multiplier.value
-	generator.set_type(type.get_selected_id())
-	generator.generate_image({"time": time.text, "mod1" : mod1.value, "mod2" : mod2.value})
+	generator.generate_image(example_type[type.get_selected_id()].material, Vector2(512,512), multiplier.value, {"time": time.text, "mod1" : mod1.value, "mod2" : mod2.value})
 	yield(generator, "generated")
 	getted_image = generator.get_image()
-	
+
 	var text = ImageTexture.new()
 	text.create_from_image(getted_image)
 	result.texture = text
